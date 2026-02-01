@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import '../../config/theme.dart';
+import '../../services/auth_service.dart';
 import '../../widgets/gradient_background.dart';
 import '../auth/login_screen.dart';
+import '../home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,6 +18,7 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
+  final _authService = AuthService();
 
   @override
   void initState() {
@@ -43,6 +46,31 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.forward();
 
     Timer(const Duration(seconds: 3), () {
+      _checkAuthState();
+    });
+  }
+
+  Future<void> _checkAuthState() async {
+    final isLoggedIn = await _authService.isLoggedIn();
+    final currentUser = _authService.currentUser;
+
+    if (!mounted) return;
+
+    if (isLoggedIn && currentUser != null) {
+      // User is logged in, go to home
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const HomeScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+          transitionDuration: const Duration(milliseconds: 500),
+        ),
+      );
+    } else {
+      // User is not logged in, go to login
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
@@ -54,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen>
           transitionDuration: const Duration(milliseconds: 500),
         ),
       );
-    });
+    }
   }
 
   @override

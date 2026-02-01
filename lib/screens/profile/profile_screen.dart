@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../config/theme.dart';
+import '../../services/auth_service.dart';
 import '../../widgets/gradient_background.dart';
 import '../auth/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-  void _handleLogout(BuildContext context) {
-    showDialog(
+  Future<void> _handleLogout(BuildContext context) async {
+    final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(
@@ -17,20 +18,11 @@ class ProfileScreen extends StatelessWidget {
         content: const Text('Are you sure you want to logout?'),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(context, false),
             child: const Text('Cancel'),
           ),
           ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context); // Close dialog
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ),
-                (route) => false,
-              );
-            },
+            onPressed: () => Navigator.pop(context, true),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.error,
             ),
@@ -39,6 +31,23 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
     );
+
+    if (result == true) {
+      // Sign out from Firebase
+      final authService = AuthService();
+      await authService.signOut();
+
+      if (!context.mounted) return;
+
+      // Navigate to login screen
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        ),
+        (route) => false,
+      );
+    }
   }
 
   @override
@@ -112,9 +121,9 @@ class ProfileScreen extends StatelessWidget {
                         const SizedBox(height: 20),
 
                         // User Name
-                        const Text(
-                          'John Doe',
-                          style: TextStyle(
+                        Text(
+                          AuthService().currentUser?.displayName ?? 'User',
+                          style: const TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF1A1A1A),
@@ -132,18 +141,18 @@ class ProfileScreen extends StatelessWidget {
                             color: const Color(0xFFF5F5F5),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.email_outlined,
                                 size: 16,
                                 color: Color(0xFF757575),
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
-                                'john.doe@gmail.com',
-                                style: TextStyle(
+                                AuthService().currentUser?.email ?? 'user@example.com',
+                                style: const TextStyle(
                                   fontSize: 14,
                                   color: Color(0xFF424242),
                                   fontWeight: FontWeight.w500,
