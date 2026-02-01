@@ -339,19 +339,19 @@ class ProfileScreen extends StatelessWidget {
           style: const TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 16,
-            color: Color(0xFF1A1A1A),
+            color: Colors.white,
           ),
         ),
         subtitle: Text(
           subtitle,
           style: const TextStyle(
             fontSize: 13,
-            color: Color(0xFF757575),
+            color: Color(0xFFB0B0B0),
           ),
         ),
         trailing: const Icon(
           Icons.chevron_right,
-          color: Color(0xFF9E9E9E),
+          color: Color(0xFFB0B0B0),
         ),
       ),
     );
