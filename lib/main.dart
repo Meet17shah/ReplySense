@@ -4,6 +4,9 @@ import 'firebase_options.dart';
 
 import 'config/theme.dart';
 import 'screens/splash/splash_screen.dart';
+import 'screens/dashboard/dashboard_screen.dart';
+import 'screens/templates/templates_list_screen.dart';
+import 'screens/templates/add_template_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +26,11 @@ class ReplySenseApp extends StatelessWidget {
       theme: appTheme,
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
+      routes: {
+        '/dashboard': (context) => const DashboardScreen(),
+        '/templates': (context) => const TemplatesListScreen(),
+        '/add-template': (context) => const AddTemplateScreen(),
+      },
     );
   }
 }

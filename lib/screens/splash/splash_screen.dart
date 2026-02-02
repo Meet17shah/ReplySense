@@ -4,7 +4,7 @@ import '../../config/theme.dart';
 import '../../services/auth_service.dart';
 import '../../widgets/gradient_background.dart';
 import '../auth/login_screen.dart';
-import '../home/home_screen.dart';
+import '../dashboard/dashboard_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -57,12 +57,12 @@ class _SplashScreenState extends State<SplashScreen>
     if (!mounted) return;
 
     if (isLoggedIn && currentUser != null) {
-      // User is logged in, go to home
+      // User is logged in, go to dashboard
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>
-              const HomeScreen(),
+              const DashboardScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 import '../../services/auth_service.dart';
 import '../../widgets/gradient_background.dart';
-import '../home/home_screen.dart';
+import '../dashboard/dashboard_screen.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (result['success']) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => const DashboardScreen()),
       );
     } else {
       _showErrorDialog(result['message']);
@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (result['success']) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => const DashboardScreen()),
       );
     } else {
       _showErrorDialog(result['message']);
