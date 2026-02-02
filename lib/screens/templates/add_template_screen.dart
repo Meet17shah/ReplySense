@@ -152,35 +152,77 @@ class _AddTemplateScreenState extends State<AddTemplateScreen> {
                 const SizedBox(height: 24),
 
                 // Template Title Field
+                Text(
+                  'Template Title',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey[800],
+                  ),
+                ),
+                const SizedBox(height: 8),
                 TextFormField(
                   controller: _titleController,
                   maxLength: 50,
                   textCapitalization: TextCapitalization.words,
+                  style: const TextStyle(fontSize: 16, color: Colors.black87),
                   decoration: InputDecoration(
-                    labelText: 'Template Title',
+                    labelStyle: TextStyle(color: Colors.grey[700], fontSize: 14),
                     hintText: 'e.g., Professional Thank You',
-                    prefixIcon: const Icon(Icons.title),
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    prefixIcon: Icon(Icons.title, color: Colors.grey[600]),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.grey[300]!),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.grey[300]!),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.blue, width: 2),
                     ),
                     filled: true,
-                    fillColor: Colors.grey[50],
+                    fillColor: Colors.white,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   ),
                   validator: TemplateModel.validateTitle,
                 ),
                 const SizedBox(height: 16),
 
                 // Category Dropdown
+                Text(
+                  'Category',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey[800],
+                  ),
+                ),
+                const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
                   value: _selectedCategory,
+                  style: const TextStyle(fontSize: 16, color: Colors.black87),
+                  icon: Icon(Icons.arrow_drop_down, color: Colors.grey[700], size: 30),
                   decoration: InputDecoration(
-                    labelText: 'Category',
-                    prefixIcon: const Icon(Icons.category),
+                    labelStyle: TextStyle(color: Colors.grey[700], fontSize: 14),
+                    prefixIcon: Icon(Icons.category, color: Colors.grey[600]),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.grey[300]!),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: Colors.grey[300]!),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.blue, width: 2),
                     ),
                     filled: true,
-                    fillColor: Colors.grey[50],
+                    fillColor: Colors.white,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   ),
                   items: TemplateModel.categories.map((category) {
                     return DropdownMenuItem(
@@ -200,12 +242,20 @@ class _AddTemplateScreenState extends State<AddTemplateScreen> {
                 const SizedBox(height: 16),
 
                 // Template Content Field
+                Text(
+                  'Template Content',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey[800],
+                  ),
+                ),
+                const SizedBox(height: 8),
                 TextFormField(
                   controller: _contentController,
                   maxLines: 8,
                   maxLength: 1000,
                   decoration: InputDecoration(
-                    labelText: 'Template Content',
                     hintText: 'Enter your reply template here...',
                     alignLabelWithHint: true,
                     border: OutlineInputBorder(
