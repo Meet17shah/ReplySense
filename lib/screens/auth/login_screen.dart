@@ -115,21 +115,73 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 120,
                       height: 120,
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border.all(
+                          color: const Color(0xFF3B82F6).withOpacity(0.3),
+                          width: 2,
+                        ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
+                            color: const Color(0xFF3B82F6).withOpacity(0.2),
+                            blurRadius: 30,
+                            spreadRadius: 5,
                           ),
                         ],
                       ),
                       child: Center(
-                        child: Icon(
-                          Icons.reply_rounded,
-                          size: 60,
-                          color: AppColors.primary,
+                        child: Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(18),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 15,
+                                offset: const Offset(0, 5),
+                              ),
+                            ],
+                          ),
+                          child: Stack(
+                            children: [
+                              // Email envelope
+                              Center(
+                                child: Icon(
+                                  Icons.mail_outline,
+                                  size: 45,
+                                  color: Colors.grey[300],
+                                ),
+                              ),
+                              // Reply arrow overlay
+                              Positioned(
+                                right: 12,
+                                bottom: 12,
+                                child: Container(
+                                  padding: const EdgeInsets.all(6),
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFF3B82F6),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.reply_rounded,
+                                    color: Colors.white,
+                                    size: 16,
+                                  ),
+                                ),
+                              ),
+                              // Sparkle effect
+                              Positioned(
+                                right: 10,
+                                top: 10,
+                                child: Icon(
+                                  Icons.auto_awesome,
+                                  color: const Color(0xFF3B82F6),
+                                  size: 14,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -374,7 +426,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text(
                           "Don't have an account? ",
                           style: TextStyle(
-                            color: AppColors.textOnPrimary.withOpacity(0.8),
+                            color: AppColors.textSecondary,
                             fontSize: 14,
                           ),
                         ),
@@ -383,7 +435,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Text(
                             'Create Account',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.primary,
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
