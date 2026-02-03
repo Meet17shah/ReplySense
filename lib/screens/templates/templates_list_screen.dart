@@ -379,23 +379,23 @@ class _TemplatesListScreenState extends State<TemplatesListScreen> {
   Color _getCategoryColor(String category) {
     switch (category) {
       case 'Professional':
-        return AppColors.primaryPurple;
+        return AppColors.primary;
       case 'Casual':
-        return Colors.green;
+        return AppColors.green;
       case 'Apology':
-        return Colors.red;
+        return AppColors.error;
       case 'Thank You':
-        return Colors.purple;
+        return AppColors.purple;
       case 'Follow Up':
         return AppColors.orange;
       case 'Meeting':
-        return Colors.teal;
+        return AppColors.secondary;
       case 'Introduction':
-        return Colors.indigo;
+        return AppColors.primaryDark;
       case 'Rejection':
-        return Colors.brown;
+        return AppColors.textSecondary;
       default:
-        return Colors.grey;
+        return AppColors.textTertiary;
     }
   }
 

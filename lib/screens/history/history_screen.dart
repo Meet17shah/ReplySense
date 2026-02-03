@@ -113,7 +113,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('History'),
-        backgroundColor: AppColors.primaryPurple,
+        backgroundColor: AppColors.primary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -168,13 +168,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     Container(
                       padding: const EdgeInsets.all(30),
                       decoration: BoxDecoration(
-                        color: AppColors.primaryPurple.withOpacity(0.1),
+                        color: AppColors.primary.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
                         Icons.history,
                         size: 80,
-                        color: AppColors.primaryPurple,
+                        color: AppColors.primary,
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -206,7 +206,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          gradient: AppGradients.purpleGradient,
+                          gradient: AppGradients.blueGradient,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Icon(
@@ -221,7 +221,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: AppColors.primaryPurple,
+                          color: AppColors.primary,
                         ),
                       ),
                     ],

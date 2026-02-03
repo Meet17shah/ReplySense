@@ -96,7 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primaryPurple,
+              backgroundColor: AppColors.primary,
             ),
             child: const Text('Login Now'),
           ),
@@ -160,7 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           'Create your account to get started',
                           style: TextStyle(
                             fontSize: 16,
-                            color: AppColors.lavender.withOpacity(0.8),
+                            color: AppColors.textOnPrimary.withOpacity(0.8),
                           ),
                         ),
                         const SizedBox(height: 40),
@@ -173,7 +173,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           decoration: InputDecoration(
                             labelText: 'Full Name',
                             hintText: 'Enter your full name',
-                            prefixIcon: const Icon(Icons.person_outline, color: AppColors.lavender),
+                            prefixIcon: const Icon(Icons.person_outline, color: AppColors.textOnPrimary),
                             filled: true,
                             fillColor: const Color(0xFF1A1F3A),
                             border: OutlineInputBorder(
@@ -186,13 +186,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(color: AppColors.primaryPurple, width: 2),
+                              borderSide: const BorderSide(color: AppColors.primary, width: 2),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: const BorderSide(color: AppColors.error, width: 1),
                             ),
-                            labelStyle: const TextStyle(color: AppColors.lavender),
+                            labelStyle: const TextStyle(color: AppColors.textOnPrimary),
                             hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                           ),
                           validator: (value) {
@@ -215,7 +215,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           decoration: InputDecoration(
                             labelText: 'Email',
                             hintText: 'Enter your email',
-                            prefixIcon: const Icon(Icons.email_outlined, color: AppColors.lavender),
+                            prefixIcon: const Icon(Icons.email_outlined, color: AppColors.textOnPrimary),
                             filled: true,
                             fillColor: const Color(0xFF1A1F3A),
                             border: OutlineInputBorder(
@@ -228,13 +228,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(color: AppColors.primaryPurple, width: 2),
+                              borderSide: const BorderSide(color: AppColors.primary, width: 2),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: const BorderSide(color: AppColors.error, width: 1),
                             ),
-                            labelStyle: const TextStyle(color: AppColors.lavender),
+                            labelStyle: const TextStyle(color: AppColors.textOnPrimary),
                             hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                           ),
                           validator: (value) => AuthService.validateEmail(value ?? ''),
@@ -249,11 +249,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           decoration: InputDecoration(
                             labelText: 'Password',
                             hintText: 'Enter your password',
-                            prefixIcon: const Icon(Icons.lock_outline, color: AppColors.lavender),
+                            prefixIcon: const Icon(Icons.lock_outline, color: AppColors.textOnPrimary),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                                color: AppColors.lavender,
+                                color: AppColors.textOnPrimary,
                               ),
                               onPressed: () {
                                 setState(() => _obscurePassword = !_obscurePassword);
@@ -271,13 +271,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(color: AppColors.primaryPurple, width: 2),
+                              borderSide: const BorderSide(color: AppColors.primary, width: 2),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: const BorderSide(color: AppColors.error, width: 1),
                             ),
-                            labelStyle: const TextStyle(color: AppColors.lavender),
+                            labelStyle: const TextStyle(color: AppColors.textOnPrimary),
                             hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                           ),
                           validator: (value) => AuthService.validatePassword(value ?? ''),
@@ -292,11 +292,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           decoration: InputDecoration(
                             labelText: 'Confirm Password',
                             hintText: 'Re-enter your password',
-                            prefixIcon: const Icon(Icons.lock_outline, color: AppColors.lavender),
+                            prefixIcon: const Icon(Icons.lock_outline, color: AppColors.textOnPrimary),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
-                                color: AppColors.lavender,
+                                color: AppColors.textOnPrimary,
                               ),
                               onPressed: () {
                                 setState(() => _obscureConfirmPassword = !_obscureConfirmPassword);
@@ -314,13 +314,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: const BorderSide(color: AppColors.primaryPurple, width: 2),
+                              borderSide: const BorderSide(color: AppColors.primary, width: 2),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: const BorderSide(color: AppColors.error, width: 1),
                             ),
-                            labelStyle: const TextStyle(color: AppColors.lavender),
+                            labelStyle: const TextStyle(color: AppColors.textOnPrimary),
                             hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                           ),
                           validator: (value) {
@@ -339,7 +339,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: ElevatedButton(
                             onPressed: _isLoading ? null : _handleRegister,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primaryPurple,
+                              backgroundColor: AppColors.primary,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
@@ -373,7 +373,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Text(
                               'Already have an account? ',
                               style: TextStyle(
-                                color: AppColors.lavender.withOpacity(0.8),
+                                color: AppColors.textOnPrimary.withOpacity(0.8),
                                 fontSize: 14,
                               ),
                             ),

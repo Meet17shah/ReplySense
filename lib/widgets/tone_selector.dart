@@ -46,11 +46,11 @@ class ToneSelector extends StatelessWidget {
                   vertical: 12,
                 ),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.primaryPurple : Colors.white,
+                  color: isSelected ? AppColors.primary : Colors.white,
                   borderRadius: BorderRadius.circular(25),
                   border: Border.all(
                     color: isSelected
-                        ? AppColors.primaryPurple
+                        ? AppColors.primary
                         : const Color(0xFFE0E0E0),
                     width: 1.5,
                   ),

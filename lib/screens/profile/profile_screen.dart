@@ -65,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.arrow_back),
-                      color: Colors.white,
+                      color: AppColors.textPrimary,
                       onPressed: () => Navigator.pop(context),
                     ),
                     const SizedBox(width: 12),
@@ -74,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: AppColors.textPrimary,
                       ),
                     ),
                   ],
@@ -102,11 +102,11 @@ class ProfileScreen extends StatelessWidget {
                           width: 120,
                           height: 120,
                           decoration: BoxDecoration(
-                            color: AppColors.primaryPurple,
+                            color: AppColors.primary,
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: AppColors.primaryPurple.withOpacity(0.2),
+                                color: AppColors.primary.withOpacity(0.2),
                                 blurRadius: 15,
                                 offset: const Offset(0, 5),
                               ),
@@ -140,6 +140,10 @@ class ProfileScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: const Color(0xFFF5F5F5),
                             borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: Colors.grey[300]!,
+                              width: 1.5,
+                            ),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -171,7 +175,7 @@ class ProfileScreen extends StatelessWidget {
                                 icon: Icons.history,
                                 title: 'Total Replies',
                                 value: '24',
-                                color: AppColors.primaryPurple,
+                                color: AppColors.primary,
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -180,7 +184,7 @@ class ProfileScreen extends StatelessWidget {
                                 icon: Icons.auto_awesome,
                                 title: 'This Week',
                                 value: '8',
-                                color: AppColors.accentPurple,
+                                color: AppColors.secondary,
                               ),
                             ),
                           ],
@@ -272,8 +276,10 @@ class ProfileScreen extends StatelessWidget {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+        borderRadius: BorderRadius.circular(16),        side: BorderSide(
+          color: Colors.grey[300]!,
+          width: 1.5,
+        ),      ),
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
@@ -332,35 +338,39 @@ class ProfileScreen extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: Colors.grey[300]!,
+          width: 1.5,
+        ),
       ),
       child: ListTile(
         onTap: onTap,
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppColors.primaryPurple.withOpacity(0.1),
+            color: AppColors.primary.withOpacity(0.1),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Icon(icon, color: AppColors.primaryPurple, size: 24),
+          child: Icon(icon, color: AppColors.primary, size: 24),
         ),
         title: Text(
           title,
           style: const TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 16,
-            color: Colors.white,
+            color: AppColors.textPrimary,
           ),
         ),
         subtitle: Text(
           subtitle,
           style: const TextStyle(
             fontSize: 13,
-            color: Color(0xFFB0B0B0),
+            color: AppColors.textSecondary,
           ),
         ),
         trailing: const Icon(
           Icons.chevron_right,
-          color: Color(0xFFB0B0B0),
+          color: AppColors.textSecondary,
         ),
       ),
     );

@@ -14,7 +14,7 @@ class GradientBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Color(0xFF0A0E27), // Dark navy background
+        color: Color(0xFFF8FAFC), // Clean light gray background
       ),
       child: child,
     );

@@ -1,110 +1,121 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// Rich Purple Gradient Color Palette with Dark Theme
+// Modern Professional Light Theme Color Palette
 class AppColors {
-  // Primary Purple Gradient Colors (More vibrant)
-  static const Color primaryPurple = Color(0xFF9C27B0); // Vibrant Purple
-  static const Color primaryPurpleDark = Color(0xFF6A1B9A); // Deep Purple
-  static const Color primaryPurpleLight = Color(0xFFBA68C8); // Light Purple
-  static const Color accentPurple = Color(0xFFCE93D8); // Accent Purple
-  static const Color lavender = Color(0xFFE1BEE7); // Light Lavender
+  // Primary Brand Colors (Professional Blue)
+  static const Color primary = Color(0xFF2563EB); // Modern Blue
+  static const Color primaryDark = Color(0xFF1E40AF); // Dark Blue
+  static const Color primaryLight = Color(0xFF60A5FA); // Light Blue
+  static const Color accent = Color(0xFF3B82F6); // Bright Blue
   
-  // Gradient Colors for Rich UI (More vibrant on dark)
-  static const Color gradientStart = Color(0xFF7B1FA2); // Vivid Purple
-  static const Color gradientMiddle = Color(0xFF9C27B0); // Bright Purple
-  static const Color gradientEnd = Color(0xFFAB47BC); // Light Purple
-  static const Color neonPurple = Color(0xFFD500F9); // Neon Purple
+  // Secondary Colors (Professional Teal/Cyan)
+  static const Color secondary = Color(0xFF06B6D4); // Cyan
+  static const Color secondaryDark = Color(0xFF0891B2); // Dark Cyan
+  static const Color secondaryLight = Color(0xFF22D3EE); // Light Cyan
   
-  // Dark Theme Colors (Navy/Black)
-  static const Color darkBackground = Color(0xFF0A0E27); // Dark Navy
-  static const Color darkSurface = Color(0xFF1A1F3A); // Navy Surface
-  static const Color darkCard = Color(0xFF1A1F3A); // Navy Card
+  // Light Theme Background Colors
+  static const Color background = Color(0xFFF8FAFC); // Off-white background
+  static const Color surface = Color(0xFFFFFFFF); // Pure white surface
+  static const Color surfaceVariant = Color(0xFFF1F5F9); // Light gray variant
+  static const Color cardBackground = Color(0xFFFFFFFF); // White cards
   
-  // Accent Border Colors
-  static const Color cyan = Color(0xFF00D9FF); // Cyan accent
-  static const Color orange = Color(0xFFFF9500); // Orange accent
-  static const Color blue = Color(0xFF5E81F4); // Blue accent
+  // Accent Colors for Features
+  static const Color orange = Color(0xFFF97316); // Vibrant orange
+  static const Color purple = Color(0xFF8B5CF6); // Soft purple
+  static const Color green = Color(0xFF10B981); // Fresh green
+  static const Color pink = Color(0xFFEC4899); // Modern pink
   
-  // Additional colors
-  static const Color gold = Color(0xFFFFD700); // Gold accent
-  static const Color neonGreen = Color(0xFF00D9FF); // Cyan Green
-  static const Color success = Color(0xFF4CAF50); // Green
-  static const Color warning = Color(0xFFFFC107); // Amber
-  static const Color error = Color(0xFFF44336); // Red
-  static const Color background = Color(0xFF000000); // Black background
-  static const Color surface = Color(0xFF1E1E1E); // Dark surface
-  static const Color textPrimary = Color(0xFFFFFFFF); // White text
-  static const Color textSecondary = Color(0xFFB0B0B0); // Gray text
-  static const Color textOnPurple = Color(0xFFFFFFFF);
+  // Status Colors
+  static const Color success = Color(0xFF10B981); // Green
+  static const Color warning = Color(0xFFF59E0B); // Amber
+  static const Color error = Color(0xFFEF4444); // Red
+  static const Color info = Color(0xFF3B82F6); // Blue
+  
+  // Text Colors (Dark on Light)
+  static const Color textPrimary = Color(0xFF0F172A); // Almost black
+  static const Color textSecondary = Color(0xFF64748B); // Medium gray
+  static const Color textTertiary = Color(0xFF94A3B8); // Light gray
+  static const Color textOnPrimary = Color(0xFFFFFFFF); // White on colored bg
+  
+  // Border & Divider Colors
+  static const Color border = Color(0xFFE2E8F0); // Light border
+  static const Color divider = Color(0xFFCBD5E1); // Subtle divider
+  
+  // Shadow Colors
+  static const Color shadow = Color(0x0F000000); // Subtle shadow
+  static const Color shadowMedium = Color(0x1A000000); // Medium shadow
 }
 
-// Gradient Definitions (Vibrant on Dark)
+// Gradient Definitions (Subtle and Professional)
 class AppGradients {
-  static const LinearGradient purpleGradient = LinearGradient(
+  // Subtle Blue Gradient
+  static const LinearGradient blueGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
-      Color(0xFF7B1FA2),
-      Color(0xFF9C27B0),
-      Color(0xFFBA68C8),
+      Color(0xFF3B82F6),
+      Color(0xFF2563EB),
     ],
   );
   
-  static const LinearGradient neonPurpleGradient = LinearGradient(
+  // Cyan to Blue Gradient
+  static const LinearGradient cyanBlueGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
-      Color(0xFF6A1B9A),
-      Color(0xFF9C27B0),
-      Color(0xFFCE93D8),
-      Color(0xFFE1BEE7),
+      Color(0xFF06B6D4),
+      Color(0xFF3B82F6),
     ],
   );
   
-  static const LinearGradient purpleGradientVertical = LinearGradient(
+  // Soft Background Gradient
+  static const LinearGradient backgroundGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     colors: [
-      Color(0xFF7B1FA2),
-      Color(0xFF9C27B0),
-      Color(0xFFBA68C8),
+      Color(0xFFFFFFFF),
+      Color(0xFFF8FAFC),
     ],
   );
   
-  static const LinearGradient darkPurpleGradient = LinearGradient(
+  // Card Gradient (very subtle)
+  static const LinearGradient cardGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
-      Color(0xFF4A148C),
-      Color(0xFF6A1B9A),
-      Color(0xFF9C27B0),
+      Color(0xFFFFFFFF),
+      Color(0xFFFAFAFA),
     ],
   );
   
-  static const LinearGradient glassGradient = LinearGradient(
+  // Overlay Gradient
+  static const LinearGradient overlayGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
-      Color(0x20FFFFFF),
-      Color(0x10FFFFFF),
+      Color(0x10000000),
+      Color(0x05000000),
     ],
   );
 }
 
-// App Theme (Dark with Gradient)
+// App Theme (Modern Light Theme)
 ThemeData appTheme = ThemeData(
-  // Color Scheme
-  brightness: Brightness.dark,
-  primaryColor: AppColors.primaryPurple,
-  primaryColorDark: AppColors.primaryPurpleDark,
-  primaryColorLight: AppColors.primaryPurpleLight,
-  scaffoldBackgroundColor: const Color(0xFF0A0E27),
-  colorScheme: const ColorScheme.dark(
-    primary: AppColors.primaryPurple,
-    secondary: AppColors.accentPurple,
-    surface: Color(0xFF1A1F3A),
+  // Color Scheme - Light
+  brightness: Brightness.light,
+  primaryColor: AppColors.primary,
+  scaffoldBackgroundColor: AppColors.background,
+  colorScheme: const ColorScheme.light(
+    primary: AppColors.primary,
+    secondary: AppColors.secondary,
+    surface: AppColors.surface,
+    surfaceContainerHighest: AppColors.surfaceVariant,
     error: AppColors.error,
+    onPrimary: AppColors.textOnPrimary,
+    onSecondary: AppColors.textOnPrimary,
+    onSurface: AppColors.textPrimary,
+    onError: AppColors.textOnPrimary,
   ),
 
   // Text Theme with Google Fonts
@@ -114,11 +125,13 @@ ThemeData appTheme = ThemeData(
         fontSize: 32,
         fontWeight: FontWeight.bold,
         color: AppColors.textPrimary,
+        letterSpacing: -0.5,
       ),
       displayMedium: TextStyle(
         fontSize: 28,
         fontWeight: FontWeight.bold,
         color: AppColors.textPrimary,
+        letterSpacing: -0.5,
       ),
       displaySmall: TextStyle(
         fontSize: 24,
@@ -160,63 +173,72 @@ ThemeData appTheme = ThemeData(
 
   // AppBar Theme
   appBarTheme: AppBarTheme(
-    backgroundColor: Colors.transparent,
-    foregroundColor: AppColors.textOnPurple,
+    backgroundColor: AppColors.surface,
+    foregroundColor: AppColors.textPrimary,
     elevation: 0,
     centerTitle: true,
+    surfaceTintColor: Colors.transparent,
+    shadowColor: AppColors.shadowMedium,
     titleTextStyle: GoogleFonts.poppins(
       fontSize: 20,
-      fontWeight: FontWeight.bold,
-      color: AppColors.textOnPurple,
+      fontWeight: FontWeight.w600,
+      color: AppColors.textPrimary,
+      letterSpacing: -0.5,
+    ),
+    iconTheme: const IconThemeData(
+      color: AppColors.textPrimary,
     ),
   ),
 
   // Card Theme
   cardTheme: CardThemeData(
-    elevation: 4,
-    shadowColor: Colors.black.withOpacity(0.3),
+    elevation: 2,
+    shadowColor: AppColors.shadowMedium,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(16),
     ),
-    color: const Color(0xFF1A1F3A),
+    color: AppColors.cardBackground,
+    surfaceTintColor: Colors.transparent,
   ),
 
   // Button Themes
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: AppColors.primaryPurple,
-      foregroundColor: AppColors.textOnPurple,
+      backgroundColor: AppColors.primary,
+      foregroundColor: AppColors.textOnPrimary,
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
       ),
-      elevation: 4,
-      shadowColor: AppColors.primaryPurple.withOpacity(0.5),
+      elevation: 2,
+      shadowColor: AppColors.primary.withOpacity(0.3),
       textStyle: GoogleFonts.poppins(
         fontSize: 16,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.5,
       ),
     ),
   ),
 
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      foregroundColor: AppColors.primaryPurple,
+      foregroundColor: AppColors.primary,
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-      side: const BorderSide(color: AppColors.primaryPurple, width: 2),
+      side: const BorderSide(color: AppColors.primary, width: 1.5),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
       ),
       textStyle: GoogleFonts.poppins(
         fontSize: 16,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.5,
       ),
     ),
   ),
 
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
-      foregroundColor: AppColors.primaryPurple,
+      foregroundColor: AppColors.primary,
       textStyle: GoogleFonts.poppins(
         fontSize: 14,
         fontWeight: FontWeight.w600,
@@ -227,30 +249,30 @@ ThemeData appTheme = ThemeData(
   // Input Decoration Theme
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: const Color(0xFF1A1F3A),
+    fillColor: AppColors.surface,
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
-      borderSide: BorderSide(color: AppColors.primaryPurple.withOpacity(0.3)),
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: AppColors.border),
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
-      borderSide: BorderSide(color: AppColors.primaryPurple.withOpacity(0.3)),
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: AppColors.border),
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
-      borderSide: const BorderSide(color: AppColors.primaryPurple, width: 2),
+      borderRadius: BorderRadius.circular(12),
+      borderSide: const BorderSide(color: AppColors.primary, width: 2),
     ),
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(12),
       borderSide: const BorderSide(color: AppColors.error),
     ),
     focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(12),
       borderSide: const BorderSide(color: AppColors.error, width: 2),
     ),
-    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
     labelStyle: GoogleFonts.poppins(color: AppColors.textSecondary),
-    hintStyle: GoogleFonts.poppins(color: AppColors.textSecondary),
+    hintStyle: GoogleFonts.poppins(color: AppColors.textTertiary),
   ),
 
   // Icon Theme
@@ -261,15 +283,15 @@ ThemeData appTheme = ThemeData(
 
   // FloatingActionButton Theme
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: AppColors.primaryPurple,
-    foregroundColor: AppColors.textOnPurple,
-    elevation: 6,
+    backgroundColor: AppColors.primary,
+    foregroundColor: AppColors.textOnPrimary,
+    elevation: 4,
   ),
 
   // Bottom Navigation Bar Theme
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: const Color(0xFF1A1F3A),
-    selectedItemColor: AppColors.primaryPurple,
+    backgroundColor: AppColors.surface,
+    selectedItemColor: AppColors.primary,
     unselectedItemColor: AppColors.textSecondary,
     type: BottomNavigationBarType.fixed,
     elevation: 8,
@@ -284,7 +306,7 @@ ThemeData appTheme = ThemeData(
 
   // Divider Theme
   dividerTheme: const DividerThemeData(
-    color: Color(0xFF424242),
+    color: AppColors.divider,
     thickness: 1,
     space: 1,
   ),

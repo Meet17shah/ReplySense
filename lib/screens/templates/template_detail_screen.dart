@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/template_model.dart';
 import '../../services/template_service.dart';
+import '../../config/theme.dart';
 import 'edit_template_screen.dart';
 
 /// Template Detail Screen - Displays full template with actions
@@ -176,13 +177,12 @@ class _TemplateDetailScreenState extends State<TemplateDetailScreen> {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    _getCategoryColor(_template.category),
-                    _getCategoryColor(_template.category).withOpacity(0.7),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                color: _getCategoryColor(_template.category).withOpacity(0.1),
+                border: Border(
+                  bottom: BorderSide(
+                    color: _getCategoryColor(_template.category),
+                    width: 3,
+                  ),
                 ),
               ),
               child: Column(
@@ -193,13 +193,13 @@ class _TemplateDetailScreenState extends State<TemplateDetailScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: _getCategoryColor(_template.category),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       _template.category,
-                      style: TextStyle(
-                        color: _getCategoryColor(_template.category),
+                      style: const TextStyle(
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                       ),
@@ -213,7 +213,7 @@ class _TemplateDetailScreenState extends State<TemplateDetailScreen> {
                     style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: AppColors.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 8),

@@ -126,13 +126,13 @@ class HistoryCard extends StatelessWidget {
                     Icon(
                       Icons.arrow_forward,
                       size: 16,
-                      color: AppColors.primaryPurple,
+                      color: AppColors.primary,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       'Tap to view details',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: AppColors.primaryPurple,
+                            color: AppColors.primary,
                             fontWeight: FontWeight.w600,
                           ),
                     ),
@@ -149,7 +149,7 @@ class HistoryCard extends StatelessWidget {
   Color _getToneColor(String tone) {
     switch (tone.toLowerCase()) {
       case 'professional':
-        return AppColors.primaryPurple;
+        return AppColors.primary;
       case 'casual':
         return const Color(0xFF00D9FF); // Cyan
       case 'friendly':
@@ -159,7 +159,7 @@ class HistoryCard extends StatelessWidget {
       case 'enthusiastic':
         return const Color(0xFFFF9500); // Orange
       default:
-        return AppColors.primaryPurple;
+        return AppColors.primary;
     }
   }
 }

@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Generate Smart Replies',
                           style: TextStyle(
                             fontSize: 14,
-                            color: AppColors.lavender,
+                            color: AppColors.textOnPrimary,
                           ),
                         ),
                       ],
@@ -173,12 +173,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Container(
                                       padding: const EdgeInsets.all(8),
                                       decoration: BoxDecoration(
-                                        color: AppColors.primaryPurple.withOpacity(0.1),
+                                        color: AppColors.primary.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: const Icon(
                                         Icons.email_outlined,
-                                        color: AppColors.primaryPurple,
+                                        color: AppColors.primary,
                                         size: 20,
                                       ),
                                     ),
@@ -209,19 +209,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
                                       borderSide: BorderSide(
-                                        color: AppColors.primaryPurple.withOpacity(0.3),
+                                        color: AppColors.primary.withOpacity(0.3),
                                       ),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
                                       borderSide: BorderSide(
-                                        color: AppColors.primaryPurple.withOpacity(0.3),
+                                        color: AppColors.primary.withOpacity(0.3),
                                       ),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
                                       borderSide: const BorderSide(
-                                        color: AppColors.primaryPurple,
+                                        color: AppColors.primary,
                                         width: 2,
                                       ),
                                     ),
@@ -251,14 +251,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: ElevatedButton(
                             onPressed: _isGenerating ? null : _handleGenerate,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primaryPurple,
+                              backgroundColor: AppColors.primary,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               elevation: 8,
                               shadowColor:
-                                  AppColors.primaryPurple.withOpacity(0.5),
+                                  AppColors.primary.withOpacity(0.5),
                             ),
                             child: _isGenerating
                                 ? const Row(
@@ -391,10 +391,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppColors.primaryPurple.withOpacity(0.1),
+                  color: AppColors.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(icon, color: AppColors.primaryPurple, size: 28),
+                child: Icon(icon, color: AppColors.primary, size: 28),
               ),
               const SizedBox(height: 12),
               Text(

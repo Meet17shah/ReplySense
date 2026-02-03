@@ -126,33 +126,23 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       child: Center(
-                        child: ShaderMask(
-                          shaderCallback: (bounds) => const LinearGradient(
-                            colors: [Color(0xFF5E81F4), Color(0xFF9C27B0)],
-                          ).createShader(bounds),
-                          child: const Icon(
-                            Icons.forward,
-                            size: 60,
-                            color: Colors.white,
-                          ),
+                        child: Icon(
+                          Icons.reply_rounded,
+                          size: 60,
+                          color: AppColors.primary,
                         ),
                       ),
                     ),
                     const SizedBox(height: 30),
 
                     // App Name
-                    ShaderMask(
-                      shaderCallback: (bounds) => const LinearGradient(
-                        colors: [Colors.white, AppColors.lavender],
-                      ).createShader(bounds),
-                      child: const Text(
-                        'ReplySense',
-                        style: TextStyle(
-                          fontSize: 48,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          letterSpacing: 1.5,
-                        ),
+                    const Text(
+                      'ReplySense',
+                      style: TextStyle(
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.textPrimary,
+                        letterSpacing: 1.5,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -162,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       'AI-Powered Email Reply Assistant',
                       style: TextStyle(
                         fontSize: 16,
-                        color: AppColors.lavender,
+                        color: AppColors.textOnPrimary,
                         fontWeight: FontWeight.w500,
                       ),
                       textAlign: TextAlign.center,
@@ -177,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: InputDecoration(
                         labelText: 'Email',
                         hintText: 'Enter your email',
-                        prefixIcon: const Icon(Icons.email_outlined, color: AppColors.lavender),
+                        prefixIcon: const Icon(Icons.email_outlined, color: AppColors.textOnPrimary),
                         filled: true,
                         fillColor: const Color(0xFF1A1F3A),
                         border: OutlineInputBorder(
@@ -190,13 +180,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
-                          borderSide: const BorderSide(color: AppColors.primaryPurple, width: 2),
+                          borderSide: const BorderSide(color: AppColors.primary, width: 2),
                         ),
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
                           borderSide: const BorderSide(color: AppColors.error, width: 1),
                         ),
-                        labelStyle: const TextStyle(color: AppColors.lavender),
+                        labelStyle: const TextStyle(color: AppColors.textOnPrimary),
                         hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                       ),
                       validator: (value) => AuthService.validateEmail(value ?? ''),
@@ -211,11 +201,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: InputDecoration(
                         labelText: 'Password',
                         hintText: 'Enter your password',
-                        prefixIcon: const Icon(Icons.lock_outline, color: AppColors.lavender),
+                        prefixIcon: const Icon(Icons.lock_outline, color: AppColors.textOnPrimary),
                         suffixIcon: IconButton(
                           icon: Icon(
                             _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                            color: AppColors.lavender,
+                            color: AppColors.textOnPrimary,
                           ),
                           onPressed: () {
                             setState(() => _obscurePassword = !_obscurePassword);
@@ -233,13 +223,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
-                          borderSide: const BorderSide(color: AppColors.primaryPurple, width: 2),
+                          borderSide: const BorderSide(color: AppColors.primary, width: 2),
                         ),
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
                           borderSide: const BorderSide(color: AppColors.error, width: 1),
                         ),
-                        labelStyle: const TextStyle(color: AppColors.lavender),
+                        labelStyle: const TextStyle(color: AppColors.textOnPrimary),
                         hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
                       ),
                       validator: (value) => AuthService.validatePassword(value ?? ''),
@@ -253,7 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: ElevatedButton(
                         onPressed: _isLoading ? null : _handleEmailLogin,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryPurple,
+                          backgroundColor: AppColors.primary,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
@@ -283,15 +273,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     // Divider
                     Row(
                       children: [
-                        Expanded(child: Divider(color: AppColors.lavender.withOpacity(0.3))),
+                        Expanded(child: Divider(color: AppColors.textOnPrimary.withOpacity(0.3))),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Text(
                             'OR',
-                            style: TextStyle(color: AppColors.lavender.withOpacity(0.6)),
+                            style: TextStyle(color: AppColors.textOnPrimary.withOpacity(0.6)),
                           ),
                         ),
-                        Expanded(child: Divider(color: AppColors.lavender.withOpacity(0.3))),
+                        Expanded(child: Divider(color: AppColors.textOnPrimary.withOpacity(0.3))),
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -322,25 +312,43 @@ class _LoginScreenState extends State<LoginScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 // Google Icon
-                                Image.network(
-                                  'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg',
+                                Container(
                                   width: 24,
                                   height: 24,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Container(
-                                      width: 24,
-                                      height: 24,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.primaryPurple,
-                                        borderRadius: BorderRadius.circular(4),
-                                      ),
-                                      child: const Icon(
-                                        Icons.g_mobiledata_rounded,
-                                        color: Colors.white,
-                                        size: 20,
-                                      ),
-                                    );
-                                  },
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(2),
+                                  ),
+                                  child: Image.network(
+                                    'https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png',
+                                    width: 24,
+                                    height: 24,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                        padding: const EdgeInsets.all(2),
+                                        decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              Color(0xFF4285F4),
+                                              Color(0xFFEA4335),
+                                              Color(0xFFFBBC05),
+                                              Color(0xFF34A853),
+                                            ],
+                                          ),
+                                          borderRadius: BorderRadius.circular(2),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            'G',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                                 const SizedBox(width: 12),
                                 const Text(
@@ -366,7 +374,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text(
                           "Don't have an account? ",
                           style: TextStyle(
-                            color: AppColors.lavender.withOpacity(0.8),
+                            color: AppColors.textOnPrimary.withOpacity(0.8),
                             fontSize: 14,
                           ),
                         ),

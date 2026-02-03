@@ -83,13 +83,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               width: double.infinity,
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    AppColors.primaryPurple,
-                    AppColors.primaryPurple.withOpacity(0.7),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                gradient: AppGradients.blueGradient,
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(24),
+                  bottomRight: Radius.circular(24),
                 ),
               ),
               child: Column(
@@ -261,7 +258,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         currentIndex: _selectedIndex,
         onTap: _onBottomNavTapped,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: AppColors.primaryPurple,
+        selectedItemColor: AppColors.primary,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.dashboard_outlined),
@@ -299,6 +296,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: Colors.grey[300]!,
+          width: 1.5,
+        ),
       ),
       child: InkWell(
         onTap: onTap,
@@ -352,6 +353,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
       elevation: 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
+        side: BorderSide(
+          color: Colors.grey[300]!,
+          width: 1.5,
+        ),
       ),
       child: ListTile(
         leading: Container(

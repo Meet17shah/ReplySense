@@ -122,33 +122,23 @@ class _SplashScreenState extends State<SplashScreen>
                           ],
                         ),
                         child: Center(
-                          child: ShaderMask(
-                            shaderCallback: (bounds) => const LinearGradient(
-                              colors: [Color(0xFF5E81F4), Color(0xFF9C27B0)],
-                            ).createShader(bounds),
-                            child: const Icon(
-                              Icons.forward,
-                              size: 70,
-                              color: Colors.white,
-                            ),
+                          child: Icon(
+                            Icons.reply_rounded,
+                            size: 70,
+                            color: AppColors.primary,
                           ),
                         ),
                       ),
                       const SizedBox(height: 40),
 
                       // App Name
-                      ShaderMask(
-                        shaderCallback: (bounds) => const LinearGradient(
-                          colors: [Colors.white, AppColors.lavender],
-                        ).createShader(bounds),
-                        child: const Text(
-                          'ReplySense',
-                          style: TextStyle(
-                            fontSize: 56,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            letterSpacing: 2,
-                          ),
+                      const Text(
+                        'ReplySense',
+                        style: TextStyle(
+                          fontSize: 56,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textPrimary,
+                          letterSpacing: 2,
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -158,7 +148,7 @@ class _SplashScreenState extends State<SplashScreen>
                         'AI-Powered Email Assistant',
                         style: TextStyle(
                           fontSize: 18,
-                          color: AppColors.lavender,
+                          color: AppColors.textOnPrimary,
                           fontWeight: FontWeight.w500,
                           letterSpacing: 1,
                         ),

@@ -34,11 +34,15 @@ class ReplyCard extends StatelessWidget {
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: Colors.grey[300]!,
+          width: 1.5,
+        ),
       ),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: const Color(0xFF1A1F3A),
+          color: Colors.white,
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -56,7 +60,7 @@ class ReplyCard extends StatelessWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.primaryPurple,
+                          color: AppColors.primary,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
@@ -75,13 +79,13 @@ class ReplyCard extends StatelessWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF0A0E27),
+                          color: AppColors.primary.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           tone,
                           style: const TextStyle(
-                            color: AppColors.primaryPurple,
+                            color: AppColors.primary,
                             fontWeight: FontWeight.w600,
                             fontSize: 12,
                           ),
@@ -90,7 +94,7 @@ class ReplyCard extends StatelessWidget {
                     ],
                   ),
                   IconButton(
-                    icon: const Icon(Icons.copy, color: AppColors.primaryPurple),
+                    icon: const Icon(Icons.copy, color: AppColors.primary),
                     onPressed: () => _copyToClipboard(context),
                     tooltip: 'Copy to clipboard',
                   ),
@@ -99,7 +103,11 @@ class ReplyCard extends StatelessWidget {
               const SizedBox(height: 12),
               Text(
                 replyText,
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: AppColors.textPrimary,
+                  height: 1.5,
+                ),
               ),
             ],
           ),

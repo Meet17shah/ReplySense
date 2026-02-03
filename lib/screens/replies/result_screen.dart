@@ -33,7 +33,7 @@ class ResultScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Generated Replies'),
-        backgroundColor: AppColors.primaryPurple,
+        backgroundColor: AppColors.primary,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -67,7 +67,7 @@ class ResultScreen extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                gradient: AppGradients.purpleGradient,
+                                gradient: AppGradients.blueGradient,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: const Icon(
@@ -82,7 +82,7 @@ class ResultScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.primaryPurple,
+                                color: AppColors.primary,
                               ),
                             ),
                           ],
@@ -94,7 +94,7 @@ class ResultScreen extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
-                              color: AppColors.lavender,
+                              color: AppColors.textOnPrimary,
                               width: 1,
                             ),
                           ),
@@ -115,7 +115,7 @@ class ResultScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        gradient: AppGradients.purpleGradient,
+                        gradient: AppGradients.blueGradient,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Icon(
@@ -130,7 +130,7 @@ class ResultScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.primaryPurple,
+                        color: AppColors.primary,
                       ),
                     ),
                   ],
@@ -142,13 +142,13 @@ class ResultScreen extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.lavender,
+                    color: AppColors.textOnPrimary,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
                     'Tone: $tone',
                     style: const TextStyle(
-                      color: AppColors.primaryPurple,
+                      color: AppColors.primary,
                       fontWeight: FontWeight.w600,
                       fontSize: 12,
                     ),
