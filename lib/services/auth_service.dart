@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'user_profile_service.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final UserProfileService _profileService = UserProfileService();
 
   // Get current user
   User? get currentUser => _auth.currentUser;
@@ -27,6 +29,15 @@ class AuthService {
 
       // Update display name
       await userCredential.user?.updateDisplayName(fullName);
+
+      // Create user profile in Firestore
+      if (userCredential.user != null) {
+        await _profileService.createUserProfile(
+          userId: userCredential.user!.uid,
+          email: email.trim(),
+          displayName: fullName,
+        );
+      }
 
       // Save login state
       await _saveLoginState(true);
@@ -76,6 +87,14 @@ class AuthService {
         email: email.trim(),
         password: password,
       );
+
+      // Update last login time if profile exists
+      if (userCredential.user != null) {
+        final profileExists = await _profileService.userProfileExists();
+        if (profileExists) {
+          await _profileService.updateLastLogin();
+        }
+      }
 
       // Save login state
       await _saveLoginState(true);
@@ -145,6 +164,22 @@ class AuthService {
 
       // Sign in to Firebase with the Google credential
       UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+      // Create user profile if it doesn't exist
+      if (userCredential.user != null) {
+        final profileExists = await _profileService.userProfileExists();
+        if (!profileExists) {
+          await _profileService.createUserProfile(
+            userId: userCredential.user!.uid,
+            email: userCredential.user!.email ?? '',
+            displayName: userCredential.user!.displayName ?? 'User',
+            photoUrl: userCredential.user!.photoURL,
+          );
+        } else {
+          // Update last login time
+          await _profileService.updateLastLogin();
+        }
+      }
 
       // Save login state
       await _saveLoginState(true);

@@ -749,6 +749,309 @@ flutter run
 
 ---
 
+## � LAB 6 SUBMISSION REQUIREMENTS
+
+### Required Screenshots for Submission
+
+#### ✅ Screenshot 1: **Add Template Screen (CREATE)**
+**File:** `lib/screens/templates/add_template_screen.dart`
+
+**What to Show:**
+- Title input field with sample text (e.g., "Meeting Follow Up")
+- Content text area with sample reply message
+- Category dropdown showing selection (e.g., "Professional")
+- "Create Template" button at bottom
+- Clean form layout with validation hints
+
+**How to Capture:**
+1. Open ReplySense app
+2. Navigate to Templates tab
+3. Tap the floating "+" button
+4. Fill in all fields with sample data (but DON'T save yet)
+5. Take screenshot showing filled form
+
+---
+
+#### ✅ Screenshot 2: **Templates List Screen (READ)**
+**File:** `lib/screens/templates/templates_list_screen.dart`
+
+**What to Show:**
+- Multiple template cards (at least 3-5 visible)
+- Each card displaying: title, category badge, content preview
+- Favorite star icons (some filled, some empty)
+- Usage count badges
+- Bottom navigation bar
+- Search bar at top
+- Category filter chips
+
+**How to Capture:**
+1. Navigate to Templates screen
+2. Ensure you have 5+ templates created
+3. Scroll to show variety of categories
+4. Take screenshot of list view
+
+---
+
+#### ✅ Screenshot 3: **Edit Template Screen (UPDATE)**
+**File:** `lib/screens/templates/edit_template_screen.dart`
+
+**What to Show:**
+- Pre-filled form with existing template data
+- Title field showing current value
+- Content area showing current message
+- Category dropdown with current selection
+- "Update Template" button
+- AppBar showing "Edit Template"
+
+**How to Capture:**
+1. From Templates list, tap any template card
+2. In detail view, tap "Edit" button
+3. Form will load with existing data
+4. Make a small change (e.g., add a word)
+5. Take screenshot BEFORE saving
+
+---
+
+#### ✅ Screenshot 4: **Delete Confirmation Dialog (DELETE)**
+**File:** Dialog triggered from template detail or swipe action
+
+**What to Show:**
+- Modal dialog overlay
+- Warning message: "Are you sure you want to delete this template?"
+- Template title being deleted
+- Two buttons: "Cancel" and "Delete"
+- Background slightly dimmed
+
+**How to Capture:**
+1. Navigate to any template detail screen
+2. Tap the delete icon (trash can)
+3. Confirmation dialog will appear
+4. Take screenshot immediately (DON'T tap any button)
+
+---
+
+#### ✅ Screenshot 5: **Template Detail View** (Bonus - Recommended)
+**File:** `lib/screens/templates/template_detail_screen.dart`
+
+**What to Show:**
+- Full template content displayed
+- Title at top
+- Category badge with colored background
+- Complete reply message
+- Usage count: "Used X times"
+- Favorite icon (filled or empty)
+- Edit and Delete action buttons
+- Copy button
+
+**How to Capture:**
+1. From Templates list, tap any template card
+2. Detail screen opens
+3. Take screenshot showing all information
+
+---
+
+#### ✅ Screenshot 6: **Firebase Firestore Database** (Bonus - Technical Proof)
+**Platform:** Firebase Console (Web Browser)
+
+**What to Show:**
+- Firestore Database section
+- Collection path: `users > [userId] > templates`
+- At least one template document expanded
+- All fields visible: id, title, content, category, createdAt, userId, usageCount, isFavorite
+- Field types shown
+
+**How to Capture:**
+1. Open Firebase Console: https://console.firebase.google.com
+2. Navigate to your ReplySense project
+3. Click "Firestore Database" in left sidebar
+4. Navigate to: users → [your user ID] → templates
+5. Click on any template document to expand
+6. Take screenshot showing field structure
+
+---
+
+### 📄 Code Snippets for Submission
+
+Include ONLY these 4 functions in your lab report:
+
+#### 1. CREATE Function
+```dart
+// File: lib/services/template_service.dart (Lines 28-60)
+Future<String> addTemplate({
+  required String title,
+  required String content,
+  required String category,
+}) async {
+  try {
+    // Validate inputs
+    final titleError = TemplateModel.validateTitle(title);
+    if (titleError != null) throw Exception(titleError);
+
+    final contentError = TemplateModel.validateContent(content);
+    if (contentError != null) throw Exception(contentError);
+
+    final categoryError = TemplateModel.validateCategory(category);
+    if (categoryError != null) throw Exception(categoryError);
+
+    // Create template document
+    final docRef = await _templatesCollection.add({
+      'title': title.trim(),
+      'content': content.trim(),
+      'category': category,
+      'createdAt': FieldValue.serverTimestamp(),
+      'userId': _currentUserId,
+      'usageCount': 0,
+      'isFavorite': false,
+    });
+
+    return docRef.id;
+  } catch (e) {
+    throw Exception('Failed to add template: $e');
+  }
+}
+```
+
+#### 2. READ Function
+```dart
+// File: lib/services/template_service.dart (Lines 66-82)
+Stream<List<TemplateModel>> getTemplatesStream() {
+  try {
+    return _templatesCollection
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return TemplateModel.fromMap(
+          doc.data() as Map<String, dynamic>,
+          doc.id,
+        );
+      }).toList();
+    });
+  } catch (e) {
+    throw Exception('Failed to get templates stream: $e');
+  }
+}
+```
+
+#### 3. UPDATE Function
+```dart
+// File: lib/services/template_service.dart (Lines 182-219)
+Future<void> updateTemplate({
+  required String templateId,
+  String? title,
+  String? content,
+  String? category,
+  bool? isFavorite,
+}) async {
+  try {
+    final Map<String, dynamic> updates = {};
+
+    if (title != null) {
+      final titleError = TemplateModel.validateTitle(title);
+      if (titleError != null) throw Exception(titleError);
+      updates['title'] = title.trim();
+    }
+
+    if (content != null) {
+      final contentError = TemplateModel.validateContent(content);
+      if (contentError != null) throw Exception(contentError);
+      updates['content'] = content.trim();
+    }
+
+    if (category != null) {
+      final categoryError = TemplateModel.validateCategory(category);
+      if (categoryError != null) throw Exception(categoryError);
+      updates['category'] = category;
+    }
+
+    if (isFavorite != null) {
+      updates['isFavorite'] = isFavorite;
+    }
+
+    if (updates.isEmpty) {
+      throw Exception('No fields to update');
+    }
+
+    await _templatesCollection.doc(templateId).update(updates);
+  } catch (e) {
+    throw Exception('Failed to update template: $e');
+  }
+}
+```
+
+#### 4. DELETE Function
+```dart
+// File: lib/services/template_service.dart (Lines 250-257)
+Future<void> deleteTemplate(String templateId) async {
+  try {
+    await _templatesCollection.doc(templateId).delete();
+  } catch (e) {
+    throw Exception('Failed to delete template: $e');
+  }
+}
+```
+
+---
+
+### 📊 Database Schema Table (Copy this into your report)
+
+| Field Name | Type | Description | Validation/Constraints |
+|-----------|------|-------------|------------------------|
+| `id` | String | Auto-generated unique identifier | Primary Key, System generated |
+| `title` | String | Template name/title | Required, 3-50 characters |
+| `content` | String | Reply message body | Required, 10-1000 characters |
+| `category` | String | Template category | Required, From predefined list |
+| `createdAt` | Timestamp | Creation date & time | Auto-generated on creation |
+| `userId` | String | Owner's Firebase Auth UID | Auto-assigned to current user |
+| `usageCount` | Integer (Number) | Times template was used | Default: 0, Auto-incremented |
+| `isFavorite` | Boolean | Favorite status flag | Default: false, User toggleable |
+
+**Categories Available:** Professional, Casual, Apology, Thank You, Follow Up, Meeting, Introduction, Rejection, General
+
+---
+
+## 📋 Quick Screenshot Checklist
+
+Before submitting, verify you have:
+
+- [ ] Screenshot 1: Add screen with filled form (CREATE)
+- [ ] Screenshot 2: List screen showing 3+ templates (READ)
+- [ ] Screenshot 3: Edit screen with pre-filled data (UPDATE)
+- [ ] Screenshot 4: Delete confirmation dialog (DELETE)
+- [ ] Screenshot 5: Template detail view (Bonus)
+- [ ] Screenshot 6: Firebase Console showing database structure (Bonus)
+- [ ] All screenshots are clear and readable
+- [ ] Each screenshot shows the relevant functionality
+
+---
+
+## 🎓 What Makes This Implementation Complete
+
+✅ **All CRUD Operations Working:**
+- CREATE: Add new templates with validation
+- READ: Real-time list display with StreamBuilder
+- UPDATE: Edit existing templates with pre-filled forms
+- DELETE: Remove templates with confirmation
+
+✅ **Additional Features:**
+- Real-time synchronization (Firebase Streams)
+- Input validation before database operations
+- Error handling with user messages
+- Favorite/bookmark system
+- Usage tracking analytics
+- Category-based organization
+- Search and filter functionality
+- Loading and empty states
+
+✅ **Professional Code Quality:**
+- Separated service layer (template_service.dart)
+- Data models with validation (template_model.dart)
+- Clean UI screens for each operation
+- Proper error handling
+- Code documentation
+
+---
+
 ## 🔮 Future Enhancements
 
 Potential improvements for future labs:
@@ -762,8 +1065,8 @@ Potential improvements for future labs:
 ---
 
 **Completed By:** MEET HIREN SHAH  
-**Date:** February 2, 2026  
+**Date:** February 4, 2026  
 **Project:** ReplySense - AI Reply Assistant  
-**Lab:** Database Design & CRUD Operations  
+**Lab:** Lab 6 - Database Design & CRUD Operations  
 
 ✅ **All Requirements Met Successfully!**
