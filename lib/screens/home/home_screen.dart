@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../config/theme.dart';
 import '../../widgets/gradient_background.dart';
 import '../../widgets/tone_selector.dart';
+import '../../services/api_service.dart';
+import '../../services/auth_service.dart';
 import '../replies/result_screen.dart';
 import '../history/history_screen.dart';
 import '../profile/profile_screen.dart';
@@ -15,7 +17,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _emailController = TextEditingController();
-  String _selectedTone = 'Professional';
+  final ApiService _apiService = ApiService();
+  final AuthService _authService = AuthService();
+  String _selectedTone = 'professional';
   bool _isGenerating = false;
   int _selectedIndex = 0;
 
@@ -25,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  void _handleGenerate() {
+  void _handleGenerate() async {
     if (_emailController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -40,23 +44,76 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
 
-    setState(() => _isGenerating = true);
-
-    // Simulate AI processing
-    Future.delayed(const Duration(seconds: 2), () {
-      setState(() => _isGenerating = false);
-
-      // Navigate to result screen with dummy data
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ResultScreen(
-            emailText: _emailController.text,
-            tone: _selectedTone,
-          ),
+    // Get current user
+    final user = _authService.currentUser;
+    if (user == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Please log in to use this feature'),
+          backgroundColor: AppColors.error,
         ),
       );
-    });
+      return;
+    }
+
+    setState(() => _isGenerating = true);
+
+    try {
+      // Call API service
+      final result = await _apiService.analyzeEmail(
+        emailText: _emailController.text,
+        tone: _selectedTone,
+        userId: user.uid,
+      );
+
+      setState(() => _isGenerating = false);
+
+      if (result.success && result.data != null) {
+        // Show remaining requests
+        if (result.remainingRequests != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                '✨ Success! ${result.remainingRequests} requests left today',
+              ),
+              backgroundColor: AppColors.success,
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+
+        // Navigate to result screen with AI data
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResultScreen(
+              emailText: _emailController.text,
+              tone: _selectedTone,
+              summary: result.data!.summary,
+              replies: result.data!.replies,
+              todos: result.data!.todos,
+            ),
+          ),
+        );
+      } else {
+        // Show error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(result.error ?? 'Analysis failed'),
+            backgroundColor: AppColors.error,
+            duration: const Duration(seconds: 4),
+          ),
+        );
+      }
+    } catch (e) {
+      setState(() => _isGenerating = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error: ${e.toString()}'),
+          backgroundColor: AppColors.error,
+        ),
+      );
+    }
   }
 
   void _onBottomNavTapped(int index) {

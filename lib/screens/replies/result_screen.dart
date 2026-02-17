@@ -5,30 +5,25 @@ import '../../widgets/reply_card.dart';
 class ResultScreen extends StatelessWidget {
   final String emailText;
   final String tone;
+  final String? summary;
+  final List<String>? replies;
+  final List<String>? todos;
 
   const ResultScreen({
     super.key,
     required this.emailText,
     required this.tone,
+    this.summary,
+    this.replies,
+    this.todos,
   });
-
-  // Dummy data for demonstration
-  List<String> _generateDummyReplies() {
-    return [
-      "Thank you for reaching out. I've reviewed your proposal and would be happy to discuss the details further. Could we schedule a meeting next week to go over the specifics? I look forward to collaborating with you on this project.",
-      "I appreciate you taking the time to share this with me. Based on my initial review, I believe we can move forward with this initiative. Let's set up a call to address any questions and finalize the next steps.",
-      "Thanks for getting in touch. I've examined the information you provided and find it quite interesting. I'd like to explore this opportunity further and discuss how we can best proceed together.",
-    ];
-  }
-
-  String _generateDummySummary() {
-    return "The sender is proposing a new collaboration opportunity for a project. They have outlined the key objectives, timeline, and expected deliverables. The proposal includes budget estimates and requests a meeting to discuss further details and answer any questions.";
-  }
 
   @override
   Widget build(BuildContext context) {
-    final replies = _generateDummyReplies();
-    final summary = _generateDummySummary();
+    // Use provided data or fallback to dummy data
+    final displaySummary = summary ?? _generateDummySummary();
+    final displayReplies = replies ?? _generateDummyReplies();
+    final displayTodos = todos ?? [];
 
     return Scaffold(
       appBar: AppBar(
@@ -99,7 +94,7 @@ class ResultScreen extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            summary,
+                            displaySummary,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
@@ -108,6 +103,75 @@ class ResultScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
+
+                // To-Do List (if any)
+                if (displayTodos.isNotEmpty) ...[
+                  Card(
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                      ),
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: AppColors.warning.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Icon(
+                                  Icons.checklist_outlined,
+                                  color: AppColors.warning,
+                                  size: 24,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              const Text(
+                                'Action Items',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.primary,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          ...displayTodos.map((todo) => Padding(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Icon(
+                                      Icons.check_circle_outline,
+                                      color: AppColors.success,
+                                      size: 20,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        todo,
+                                        style: const TextStyle(fontSize: 15),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                ],
 
                 // Replies Header
                 Row(
@@ -146,7 +210,7 @@ class ResultScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    'Tone: $tone',
+                    'Tone: ${tone[0].toUpperCase()}${tone.substring(1)}',
                     style: const TextStyle(
                       color: AppColors.primary,
                       fontWeight: FontWeight.w600,
@@ -157,7 +221,7 @@ class ResultScreen extends StatelessWidget {
                 const SizedBox(height: 16),
 
                 // Reply Cards
-                ...replies.asMap().entries.map(
+                ...displayReplies.asMap().entries.map(
                       (entry) => Padding(
                         padding: const EdgeInsets.only(bottom: 16),
                         child: ReplyCard(
@@ -170,39 +234,34 @@ class ResultScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // Save to History Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 56,
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: const Text('Saved to history!'),
-                          backgroundColor: AppColors.success,
-                          behavior: SnackBarBehavior.floating,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                // Note: Already saved to history automatically
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.success.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: AppColors.success.withOpacity(0.3),
+                    ),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(
+                        Icons.check_circle,
+                        color: AppColors.success,
+                        size: 20,
+                      ),
+                      SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          'Automatically saved to your history',
+                          style: TextStyle(
+                            color: AppColors.success,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                      );
-                    },
-                    icon: const Icon(Icons.save_outlined, size: 24),
-                    label: const Text(
-                      'Save to History',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.success,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      elevation: 4,
-                    ),
+                    ],
                   ),
                 ),
               ],
@@ -211,5 +270,18 @@ class ResultScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // Dummy data for fallback
+  List<String> _generateDummyReplies() {
+    return [
+      "Thank you for reaching out. I've reviewed your proposal and would be happy to discuss the details further. Could we schedule a meeting next week to go over the specifics? I look forward to collaborating with you on this project.",
+      "I appreciate you taking the time to share this with me. Based on my initial review, I believe we can move forward with this initiative. Let's set up a call to address any questions and finalize the next steps.",
+      "Thanks for getting in touch. I've examined the information you provided and find it quite interesting. I'd like to explore this opportunity further and discuss how we can best proceed together.",
+    ];
+  }
+
+  String _generateDummySummary() {
+    return "The sender is proposing a new collaboration opportunity for a project. They have outlined the key objectives, timeline, and expected deliverables. The proposal includes budget estimates and requests a meeting to discuss further details and answer any questions.";
   }
 }

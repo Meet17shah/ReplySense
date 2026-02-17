@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'user_profile_service.dart';
 
 class AuthService {
@@ -22,10 +23,11 @@ class AuthService {
   }) async {
     try {
       // Create user
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: email.trim(),
-        password: password,
-      );
+      UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(
+            email: email.trim(),
+            password: password,
+          );
 
       // Update display name
       await userCredential.user?.updateDisplayName(fullName);
@@ -65,15 +67,9 @@ class AuthService {
         default:
           message = 'Registration failed: ${e.message}';
       }
-      return {
-        'success': false,
-        'message': message,
-      };
+      return {'success': false, 'message': message};
     } catch (e) {
-      return {
-        'success': false,
-        'message': 'An unexpected error occurred: $e',
-      };
+      return {'success': false, 'message': 'An unexpected error occurred: $e'};
     }
   }
 
@@ -128,10 +124,7 @@ class AuthService {
         default:
           message = 'Login failed: ${e.message}';
       }
-      return {
-        'success': false,
-        'message': message,
-      };
+      return {'success': false, 'message': message};
     } catch (e) {
       return {
         'success': false,
@@ -147,14 +140,12 @@ class AuthService {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
       if (googleUser == null) {
-        return {
-          'success': false,
-          'message': 'Google sign-in cancelled',
-        };
+        return {'success': false, 'message': 'Google sign-in cancelled'};
       }
 
       // Obtain the auth details from the request
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
@@ -163,7 +154,9 @@ class AuthService {
       );
 
       // Sign in to Firebase with the Google credential
-      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      UserCredential userCredential = await _auth.signInWithCredential(
+        credential,
+      );
 
       // Create user profile if it doesn't exist
       if (userCredential.user != null) {
@@ -190,10 +183,7 @@ class AuthService {
         'message': 'Google sign-in successful',
       };
     } catch (e) {
-      return {
-        'success': false,
-        'message': 'Google sign-in failed: $e',
-      };
+      return {'success': false, 'message': 'Google sign-in failed: $e'};
     }
   }
 
@@ -240,10 +230,7 @@ class AuthService {
         default:
           message = 'Failed to send reset email: ${e.message}';
       }
-      return {
-        'success': false,
-        'message': message,
-      };
+      return {'success': false, 'message': message};
     } catch (e) {
       return {
         'success': false,

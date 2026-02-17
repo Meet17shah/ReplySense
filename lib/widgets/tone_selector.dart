@@ -11,12 +11,11 @@ class ToneSelector extends StatelessWidget {
     required this.onToneSelected,
   });
 
-  static const List<String> tones = [
-    'Professional',
-    'Casual',
-    'Friendly',
-    'Formal',
-    'Enthusiastic',
+  // Tone values (lowercase for API)
+  static const List<Map<String, String>> tones = [
+    {'value': 'professional', 'label': 'Professional'},
+    {'value': 'friendly', 'label': 'Friendly'},
+    {'value': 'formal', 'label': 'Formal'},
   ];
 
   @override
@@ -24,21 +23,38 @@ class ToneSelector extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Select Tone',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
+        Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(8),
               ),
+              child: const Icon(
+                Icons.tune,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Text(
+              'Select Tone',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ],
         ),
         const SizedBox(height: 12),
         Wrap(
           spacing: 8,
           runSpacing: 8,
           children: tones.map((tone) {
-            final isSelected = tone == selectedTone;
+            final isSelected = tone['value'] == selectedTone;
             return GestureDetector(
-              onTap: () => onToneSelected(tone),
+              onTap: () => onToneSelected(tone['value']!),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 padding: const EdgeInsets.symmetric(
@@ -56,7 +72,7 @@ class ToneSelector extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  tone,
+                  tone['label']!,
                   style: TextStyle(
                     color: isSelected
                         ? Colors.white

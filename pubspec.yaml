@@ -40,6 +40,9 @@ dependencies:
   google_sign_in: ^6.2.2
   cloud_firestore: ^5.5.0
   
+  # AI
+  google_generative_ai: ^0.4.0
+  
   # Gradient and UI enhancements
   flutter_gradient_colors: ^2.1.1
   google_fonts: ^6.1.0
